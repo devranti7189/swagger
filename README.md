@@ -1,24 +1,59 @@
 
-                  <dependency>
 
-                                    <groupId>io.springfox</groupId>
+import org.slf4j.Logger;
 
-                                    <artifactId>springfox-swagger2</artifactId>
+import org.slf4j.LoggerFactory;
 
-                                    <version>2.9.2</version>
+import org.springframework.context.annotation.Bean;
 
-                        </dependency>
+import org.springframework.context.annotation.Configuration;
 
-                        
+import springfox.documentation.builders.ApiInfoBuilder;
 
-                        <dependency>
+import springfox.documentation.builders.RequestHandlerSelectors;
 
-                                    <groupId>io.springfox</groupId>
+import springfox.documentation.service.ApiInfo;
 
-                                    <artifactId>springfox-swagger-ui</artifactId>
+import springfox.documentation.spi.DocumentationType;
 
-                                    <version>2.9.2</version>
+import springfox.documentation.spring.web.plugins.Docket;
 
-                        </dependency>
+@SuppressWarnings("deprecation")
+
+@Configuration
+
+public class Appconfig {
+
+            private static final Logger LOG = LoggerFactory.getLogger(Appconfig.class);
+
+            @Bean
+
+            public Docket enableSwaggers() {
+
+                  return new Docket(DocumentationType.SWAGGER_2)
+
+                      .useDefaultResponseMessages(false)
+
+                      .select()
+
+                     .apis(RequestHandlerSelectors.basePackage("rest"))
+
+                     .build()
+
+                     .apiInfo(apiEndPointsInfo());
+
+               }
+
+            
+
+            private ApiInfo apiEndPointsInfo() {
+
+        return new ApiInfoBuilder().title("Emp REST API")
+
+            .build();
+
+    }
+
+} 
 
 
